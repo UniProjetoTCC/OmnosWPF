@@ -4,38 +4,7 @@
         Title="Início" Height="600" Width="1000"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"
-        Background="#F2F2F2">
-
-    <ScrollViewer>
-        <StackPanel Margin="20">
-
-            <!-- Saudações -->
-            <TextBlock Text="Boa noite, Adriel" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
-
-            <!-- Painel de Resumo -->
-            <UniformGrid Columns="3" Margin="0,0,0,20" HorizontalAlignment="Stretch">
-                <!-- A receber -->
-                <Border Background="#FFCFD2D0" Padding="15" CornerRadius="5" Height="110">
-                    <StackPanel/>
-                </Border>
-
-                <!-- A pagar -->
-
-                <!-- Fluxo -->
-            </UniformGrid>
-
-            <!-- Gráficos -->
-            <UniformGrid Columns="2" HorizontalAlignment="Stretch">
-                <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10" Height="200">
-                    <TextBlock FontWeight="Bold" Foreground="#FF050505"/>
-                    <!-- Aqui entra um gráfico depois -->
-                </Border>
-                <Border BorderBrush="#ccc" BorderThickness="1" CornerRadius="5" Margin="5" Padding="10" Height="200">
-                    <TextBlock FontWeight="Bold" Margin="0,-1,0,1"/>
-                    <!-- Aqui entra um gráfico depois -->
-                </Border>
-            </UniformGrid>
-
-        </StackPanel>
-    </ScrollViewer>
+        Background="#F2F2F2"
+        WindowState="Maximized">
+    
 </Window>

@@ -34,23 +34,30 @@ namespace LoginApp
         }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string username = UsernameBox.Text;
-            string password = PasswordBox.Password;
-            bool rememberMe = RememberMeCheck.IsChecked == true;
+            HomeWindow home = new HomeWindow();
+            home.Show();
+            this.Close();
+        }
 
-            if (username == "admin" && password == "123")
-            {
-                MessageBox.Show("Login bem-sucedido!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Abrir a janela de início
-                HomeWindow home = new HomeWindow();
-                home.Show();
-                this.Close();
-            }
-            else
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(100);
+
+            MessageBox.Show("Bem-vindo, USER!", "Login realizado", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Cria a nova janela
+            HomeWindow home = new HomeWindow();
+
+            // Se a janela de login estiver ocupando toda a tela, força maximizar a nova janela
+            if (this.WindowState == WindowState.Maximized ||
+                (this.Width >= SystemParameters.WorkArea.Width && this.Height >= SystemParameters.WorkArea.Height))
             {
-                MessageBox.Show("Usuário ou senha inválidos.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                home.WindowState = WindowState.Maximized;
             }
+
+            home.Show();
+            this.Close();
         }
 
 
