@@ -1,4 +1,4 @@
-﻿<Window x:Class="LoginApp.LoginWindow"
+<Window x:Class="OMNOS.Screens.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login"

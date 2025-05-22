@@ -1,7 +1,7 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 
-namespace LoginApp
+namespace OMNOS.Screens
 {
     public partial class LoginWindow : Window
     {
@@ -34,23 +34,10 @@ namespace LoginApp
         }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string username = UsernameBox.Text;
-            string password = PasswordBox.Password;
-            bool rememberMe = RememberMeCheck.IsChecked == true;
-
-            if (username == "admin" && password == "123")
-            {
-                MessageBox.Show("Login bem-sucedido!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                // Abrir a janela de início
-                HomeWindow home = new HomeWindow();
-                home.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Usuário ou senha inválidos.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            
+            MainWindow home = new MainWindow();
+            home.Show();
+            this.Close();
         }
 
 
