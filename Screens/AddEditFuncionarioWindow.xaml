@@ -1,0 +1,56 @@
+﻿<Window x:Class="OMNOS.Screens.AddEditFuncionarioWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Dados do Funcionário" Width="500"
+        SizeToContent="Height" MinHeight="480" MaxHeight="600" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <Label Content="ID/Matrícula:" FontWeight="SemiBold"/>
+            <TextBox x:Name="IdTextBox" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <Label Content="Nome Completo:" FontWeight="SemiBold"/>
+            <TextBox x:Name="NomeTextBox" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <Label Content="Cargo/Nível:" FontWeight="SemiBold"/>
+            <TextBox x:Name="CargoTextBox" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,0,0,10">
+            <Label Content="Email (Login):" FontWeight="SemiBold"/>
+            <TextBox x:Name="EmailTextBox" Padding="5"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="4" Header="Permissões do Usuário" FontWeight="SemiBold" Padding="10" Margin="0,5,0,10">
+            <StackPanel>
+                <CheckBox x:Name="PodeRealizarTransacoesCheckBox" Content="Pode Realizar Transações" Margin="0,3"/>
+                <CheckBox x:Name="PodeGerarRelatoriosCheckBox" Content="Pode Gerar Relatórios" Margin="0,3"/>
+                <CheckBox x:Name="PodeGerenciarProdutosCheckBox" Content="Pode Gerenciar Produtos" Margin="0,3"/>
+                <CheckBox x:Name="PodeAlterarEstoqueCheckBox" Content="Pode Alterar Estoque" Margin="0,3"/>
+                <CheckBox x:Name="PodeGerenciarPromocoesCheckBox" Content="Pode Gerenciar Promoções" Margin="0,3"/>
+            </StackPanel>
+        </GroupBox>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button x:Name="SaveButton" Content="Salvar" Width="90" Margin="0,0,10,0" Padding="8,5" Background="#3B7A57" Foreground="White" BorderThickness="0" Click="SaveButton_Click" Cursor="Hand"/>
+            <Button x:Name="CancelButton" Content="Cancelar" Width="90" Padding="8,5" IsCancel="True" BorderThickness="0" Click="CancelButton_Click" Cursor="Hand" Background="#6C757D" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,7 +1,7 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 
-namespace LoginApp
+namespace OMNOS.Screens
 {
     public partial class LoginWindow : Window
     {
@@ -34,28 +34,8 @@ namespace LoginApp
         }
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            HomeWindow home = new HomeWindow();
-            home.Show();
-            this.Close();
-        }
-
-
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            await Task.Delay(100);
-
-            MessageBox.Show("Bem-vindo, USER!", "Login realizado", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            // Cria a nova janela
-            HomeWindow home = new HomeWindow();
-
-            // Se a janela de login estiver ocupando toda a tela, força maximizar a nova janela
-            if (this.WindowState == WindowState.Maximized ||
-                (this.Width >= SystemParameters.WorkArea.Width && this.Height >= SystemParameters.WorkArea.Height))
-            {
-                home.WindowState = WindowState.Maximized;
-            }
-
+            
+            MainWindow home = new MainWindow();
             home.Show();
             this.Close();
         }
