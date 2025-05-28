@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Dados do Funcionário" Width="500"
-        SizeToContent="Height" MinHeight="480" MaxHeight="600" WindowStartupLocation="CenterOwner"
+        SizeToContent="Height" MinHeight="680" MaxHeight="750" WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -38,7 +40,17 @@
             <TextBox x:Name="EmailTextBox" Padding="5"/>
         </StackPanel>
 
-        <GroupBox Grid.Row="4" Header="Permissões do Usuário" FontWeight="SemiBold" Padding="10" Margin="0,5,0,10">
+        <StackPanel Grid.Row="4" Margin="0,0,0,10">
+            <Label Content="Nova Senha:" FontWeight="SemiBold"/>
+            <PasswordBox x:Name="SenhaPasswordBox" Padding="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Margin="0,0,0,10">
+            <Label Content="Confirmar Nova Senha:" FontWeight="SemiBold"/>
+            <PasswordBox x:Name="ConfirmarSenhaPasswordBox" Padding="5"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="6" Header="Permissões do Usuário" FontWeight="SemiBold" Padding="10" Margin="0,5,0,10">
             <StackPanel>
                 <CheckBox x:Name="PodeRealizarTransacoesCheckBox" Content="Pode Realizar Transações" Margin="0,3"/>
                 <CheckBox x:Name="PodeGerarRelatoriosCheckBox" Content="Pode Gerar Relatórios" Margin="0,3"/>
@@ -48,7 +60,7 @@
             </StackPanel>
         </GroupBox>
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
             <Button x:Name="SaveButton" Content="Salvar" Width="90" Margin="0,0,10,0" Padding="8,5" Background="#3B7A57" Foreground="White" BorderThickness="0" Click="SaveButton_Click" Cursor="Hand"/>
             <Button x:Name="CancelButton" Content="Cancelar" Width="90" Padding="8,5" IsCancel="True" BorderThickness="0" Click="CancelButton_Click" Cursor="Hand" Background="#6C757D" Foreground="White"/>
         </StackPanel>

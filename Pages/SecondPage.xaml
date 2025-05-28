@@ -4,11 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:OMNOS.Pages"
+      xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
       mc:Ignorable="d"
       d:DesignHeight="700" d:DesignWidth="1100"
       Title="ProdutosPage"
-      Background="#F7F7F7">
-
+      Background="#EDEDED">
     <Page.Resources>
         <Style x:Key="BaseActionButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="12,8"/>
@@ -17,15 +17,16 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="MinWidth" Value="90"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="4">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+                                <ContentPresenter ContentSource="Content" VerticalAlignment="Center"/>
+                            </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -42,12 +43,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="AddButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseActionButtonStyle}">
+
+        <Style x:Key="AddButtonStyle" BasedOn="{StaticResource BaseActionButtonStyle}" TargetType="Button">
             <Setter Property="Background" Value="#3B7A57"/>
         </Style>
-        <Style x:Key="SearchActionButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseActionButtonStyle}">
+        <Style x:Key="SearchActionButtonStyle" BasedOn="{StaticResource BaseActionButtonStyle}" TargetType="Button">
             <Setter Property="Background" Value="#0D1A2B"/>
+            <Setter Property="Margin" Value="0"/>
         </Style>
+
         <Style x:Key="DataGridActionButtonBaseStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="Margin" Value="3,0"/>
@@ -60,11 +64,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" CornerRadius="4"
-                                ToolTip="{TemplateBinding ToolTip}">
-                            <TextBlock Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"/>
+                        <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" CornerRadius="4" ToolTip="{TemplateBinding ToolTip}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -87,109 +88,145 @@
         <Style x:Key="DeleteButtonStyleDG" TargetType="Button" BasedOn="{StaticResource DataGridActionButtonBaseStyle}">
             <Setter Property="Background" Value="#DC3545"/>
         </Style>
+
         <Style TargetType="TextBox" x:Key="SearchTextBoxStyle">
             <Setter Property="MinWidth" Value="250"/>
             <Setter Property="Padding" Value="8,7"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,10,0"/>
-            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderBrush" Value="#CCD1D9"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="36"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
+                        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#A0AEC0"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#3B7A57"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PaginationButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseActionButtonStyle}">
+            <Setter Property="Background" Value="#3B7A57"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="MinWidth" Value="40"/>
+        </Style>
+
+        <Style x:Key="CustomDataGridHeaderStyleForProducts" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#4A5568"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="BorderBrush" Value="#E2E8F0"/>
+            <Setter Property="MinHeight" Value="40"/>
+        </Style>
+        <Style x:Key="CustomDataGridCellStyleForProducts" TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Padding="{TemplateBinding Padding}" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0,0,0,1" 
+                                BorderBrush="#EDF2F7" 
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Page.Resources>
 
-    <Grid Margin="20">
+    <Grid Margin="25">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="#DDDDDD" BorderThickness="0,0,0,1" Padding="0,0,0,15">
+        <Border Grid.Row="0" BorderBrush="#E2E8F0" BorderThickness="0,0,0,1" Padding="0,0,0,20" Margin="0,0,0,20">
             <Grid VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="&#xE734;" FontFamily="Segoe MDL2 Assets" FontSize="30" VerticalAlignment="Center" Margin="0,0,12,0" Foreground="#444444"/>
-                    <TextBlock Text="Produtos" FontSize="26" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#444444"/>
+                    <StackPanel.Effect>
+                        <DropShadowEffect
+                            ShadowDepth="1" Color="#B0C4DE" BlurRadius="5" Opacity="0.3" RenderingBias="Quality"/>
+                    </StackPanel.Effect>
+                    <materialIcons:MaterialIcon Kind="ShoppingSearchOutline" Width="36" Height="36" VerticalAlignment="Center" Margin="0,0,12,0" Foreground="#3B7A57" />
+                    <TextBlock Text="Produtos" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="#3B7A57"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1" Margin="0,15,0,15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Button x:Name="AddProductButton" Click="AddProductButton_Click" Style="{StaticResource AddButtonStyle}">
+        <Border Grid.Row="1" Padding="15" Margin="0,0,0,20" Background="White" CornerRadius="6" BorderBrush="#E2E8F0" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="AddProductButton" Grid.Column="0" Click="AddProductButton_Click" Style="{StaticResource AddButtonStyle}" Margin="0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,6,0" FontSize="14"/>
-                        <TextBlock Text="Adicionar" VerticalAlignment="Center" FontSize="14"/>
+                        <TextBlock Text="Adicionar Produto" VerticalAlignment="Center" FontSize="14"/>
                     </StackPanel>
                 </Button>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBox x:Name="SearchTextBox" Style="{StaticResource SearchTextBoxStyle}" Text=""/>
-                <Button x:Name="SearchButton" Click="SearchButton_Click" Style="{StaticResource SearchActionButtonStyle}" Margin="0">
-                    <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" FontSize="14"/>
-                </Button>
-            </StackPanel>
-        </Grid>
 
-        <Border Grid.Row="2" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="4" Background="White">
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBox x:Name="SearchTextBox" Style="{StaticResource SearchTextBoxStyle}" Text="" ToolTip="Buscar por SKU, Nome ou Categoria"/>
+                    <Button x:Name="SearchButton" Click="SearchButton_Click" Style="{StaticResource SearchActionButtonStyle}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <materialIcons:MaterialIcon Kind="Magnify" Margin="0,0,6,0" VerticalAlignment="Center" Width="16" Height="16"/>
+                            <TextBlock Text="Buscar"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="6" Background="White" Padding="1" x:Name="ProductsDataGridContainer">
             <DataGrid x:Name="ProductsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
-                      CanUserSortColumns="True" IsReadOnly="True"
-                      RowBackground="Transparent" AlternatingRowBackground="#FDFDFD" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#ECECEC"
-                      HeadersVisibility="Column" ColumnHeaderHeight="45" FontSize="14" BorderThickness="0">
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#F5F7FA"/>
-                        <Setter Property="FontWeight" Value="Medium"/>
-                        <Setter Property="Foreground" Value="#333333"/>
-                        <Setter Property="Padding" Value="12,0"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="BorderThickness" Value="0,0,1,0"/>
-                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
-                        <Setter Property="MinHeight" Value="40"/>
-                    </Style>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Padding" Value="12,8"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGridCell">
-                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.Resources>
+                      CanUserSortColumns="True" IsReadOnly="True" Sorting="ProductsDataGrid_Sorting" 
+                      Background="Transparent"
+                      AlternatingRowBackground="#F9FAFB" RowBackground="White" 
+                      GridLinesVisibility="None"
+                      HeadersVisibility="Column" 
+                      ColumnHeaderStyle="{StaticResource CustomDataGridHeaderStyleForProducts}" 
+                      CellStyle="{StaticResource CustomDataGridCellStyleForProducts}"
+                      FontSize="13.5" BorderThickness="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Código" Binding="{Binding Code}" Width="Auto" MinWidth="100"/>
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Name}" Width="*" MinWidth="200"/>
-                    <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" Width="Auto" MinWidth="150"/>
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Price, StringFormat=C, ConverterCulture=pt-BR}" Width="Auto" MinWidth="120"/>
-                    <DataGridTextColumn Header="Estoque" Binding="{Binding Stock, StringFormat=N2, ConverterCulture=pt-BR}" Width="Auto" MinWidth="100"/>
+                    <DataGridTextColumn Header="SKU" Binding="{Binding SKU}" SortMemberPath="SKU" Width="Auto" MinWidth="100"/>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Name}" SortMemberPath="Name" Width="*" MinWidth="200"/>
+                    <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" SortMemberPath="Categoria" Width="Auto" MinWidth="150"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Price, StringFormat=C, ConverterCulture=pt-BR}" SortMemberPath="Price" Width="Auto" MinWidth="120"/>
+                    <DataGridTextColumn Header="Estoque" Binding="{Binding Stock}" SortMemberPath="Stock" Width="Auto" MinWidth="100"/>
                     <DataGridTemplateColumn Header="Ações" Width="Auto" MinWidth="130">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Button Content="&#xE773;" ToolTip="Detalhes" Style="{StaticResource DetailsButtonStyleDG}"/>
+                                    <Button Click="DetailsButton_Click" Content="&#xE773;" ToolTip="Detalhes" Style="{StaticResource DetailsButtonStyleDG}"/>
                                     <Button Click="EditProductButton_Click" Content="&#xE70F;" ToolTip="Editar" Style="{StaticResource EditButtonStyleDG}"/>
                                     <Button Click="DeleteProductButton_Click" Content="&#xE74D;" ToolTip="Excluir" Style="{StaticResource DeleteButtonStyleDG}"/>
                                 </StackPanel>
@@ -200,8 +237,25 @@
             </DataGrid>
         </Border>
 
-        <Border Grid.Row="3" Padding="0,15,0,0">
-            <TextBlock x:Name="FooterStatusText" Text="" Foreground="#666666" FontSize="13" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,5">
+            <Button x:Name="PreviousPageButton" Content="❮" Click="PreviousPageButton_Click" 
+                    IsEnabled="{Binding CanGoPrevious}" Style="{StaticResource PaginationButtonStyle}"/>
+            <TextBlock Text="{Binding PageInfoText}" VerticalAlignment="Center" Margin="15,0" FontSize="14" FontWeight="SemiBold" Foreground="#4A5568"/>
+            <Button x:Name="NextPageButton" Content="❯" Click="NextPageButton_Click" 
+                    IsEnabled="{Binding CanGoNext}" Style="{StaticResource PaginationButtonStyle}"/>
+        </StackPanel>
+
+        <Border Grid.Row="4" Padding="0,10,0,0" BorderThickness="0,1,0,0" BorderBrush="#E2E8F0">
+            <TextBlock FontSize="13" HorizontalAlignment="Left" Foreground="#718096">
+                <Run Text="Mostrando " />
+                <Run x:Name="FooterStartItemRun" FontWeight="SemiBold" Foreground="#3B7A57"/>
+                <Run Text=" a " />
+                <Run x:Name="FooterEndItemRun" FontWeight="SemiBold" Foreground="#3B7A57"/>
+                <Run Text=" de " />
+                <Run x:Name="FooterTotalFilteredItemsRun" FontWeight="SemiBold" Foreground="#3B7A57"/>
+                <Run x:Name="FooterProdutoSingularPluralRun" Text=" produto(s)" />
+                <Run x:Name="FooterFilterStatusRun" FontStyle="Italic" />
+            </TextBlock>
         </Border>
     </Grid>
 </Page>

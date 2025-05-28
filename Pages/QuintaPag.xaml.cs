@@ -10,7 +10,15 @@ using System.Globalization;
 namespace OMNOS.Pages
 {
     public class Funcionario : INotifyPropertyChanged
+
     {
+        private string _senha = string.Empty; // ATENÇÃO: Em um app real, armazene o HASH da senha, não a senha em si!
+        public string Senha
+        {
+            get => _senha;
+            set { if (_senha != value) { _senha = value; OnPropertyChanged(nameof(Senha)); } }
+        }
+
         private string _id;
         public string Id { get => _id; set { if (_id != value) { _id = value; OnPropertyChanged(nameof(Id)); } } }
 
@@ -46,7 +54,7 @@ namespace OMNOS.Pages
         private bool _podeGerenciarPromocoes;
         public bool PodeGerenciarPromocoes { get => _podeGerenciarPromocoes; set { if (_podeGerenciarPromocoes != value) { _podeGerenciarPromocoes = value; OnPropertyChanged(nameof(PodeGerenciarPromocoes)); } } }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

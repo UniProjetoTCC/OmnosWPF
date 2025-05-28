@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Editar Produto" Height="360" Width="450" WindowStartupLocation="CenterOwner"
+        Title="Dados do Produto" Width="500"
+        SizeToContent="Height" MinHeight="480" MaxHeight="600" WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -21,20 +22,20 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Código:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="CodeTextBox" Padding="5" Margin="0,5" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="SKU:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="SkuTextBox" Padding="5" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Nome:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="NameTextBox" Padding="5" Margin="0,5" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Nome:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="NameTextBox" Padding="5" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Preço:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="PriceTextBox" Padding="5" Margin="0,5" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Categoria:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="CategoriaTextBox" Padding="5" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Estoque:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="StockTextBox" Padding="5" Margin="0,5" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Preço:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="PriceTextBox" Padding="5" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
 
-        <Label Grid.Row="4" Grid.Column="0" Content="Categoria:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="CategoriaTextBox" Padding="5" Margin="0,5" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Estoque:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="StockTextBox" Padding="5" Margin="0,5,0,10" VerticalContentAlignment="Center"/>
 
         <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
             <Button x:Name="SaveButton" Content="Salvar" Width="90" Margin="0,0,10,0" Padding="8,5" Background="#3B7A57" Foreground="White" BorderThickness="0" Click="SaveButton_Click" Cursor="Hand"/>

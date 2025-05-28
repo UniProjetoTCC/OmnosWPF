@@ -1,22 +1,35 @@
 ﻿using System.Windows;
 using System.Globalization;
-using OMNOS.Pages;
+using OMNOS.Pages; // Assume que a classe Product está aqui e já foi atualizada com SKU e Stock como int
 
 namespace OMNOS.Screens
 {
     public partial class EditProductWindow : Window
     {
         public Product ProductToEdit { get; private set; }
+        private bool _isNewProduct;
 
-        public EditProductWindow(Product product)
+        public EditProductWindow(Product product, bool isNew = false)
         {
             InitializeComponent();
             ProductToEdit = product;
+            _isNewProduct = isNew;
             LoadProductData();
 
             if (Application.Current.MainWindow != this && Application.Current.MainWindow != null)
             {
                 Owner = Application.Current.MainWindow;
+            }
+
+            // Desabilita a edição do SKU se for um produto existente
+            // Certifique-se que o TextBox do SKU no XAML tem x:Name="SkuTextBox"
+            if (!_isNewProduct && SkuTextBox != null)
+            {
+                SkuTextBox.IsEnabled = false;
+            }
+            else if (SkuTextBox != null) // Se for novo, garante que está habilitado
+            {
+                SkuTextBox.IsEnabled = true;
             }
         }
 
@@ -24,27 +37,35 @@ namespace OMNOS.Screens
         {
             if (ProductToEdit != null)
             {
-                CodeTextBox.Text = ProductToEdit.Code;
+                // Certifique-se que os TextBoxes no XAML têm os x:Names corretos:
+                // SkuTextBox, NameTextBox, CategoriaTextBox, PriceTextBox, StockTextBox
+                SkuTextBox.Text = ProductToEdit.SKU; // Alterado de Code para SKU
                 NameTextBox.Text = ProductToEdit.Name;
+                CategoriaTextBox.Text = ProductToEdit.Categoria;
                 PriceTextBox.Text = ProductToEdit.Price.ToString("F2", CultureInfo.CurrentCulture);
-                StockTextBox.Text = ProductToEdit.Stock.ToString("F2", CultureInfo.CurrentCulture);
-                CategoriaTextBox.Text = ProductToEdit.Categoria; // Carregar categoria
+                StockTextBox.Text = ProductToEdit.Stock.ToString(); // int para string
             }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // ... (validações existentes para Code, Name, Price, Stock) ...
-            if (string.IsNullOrWhiteSpace(CodeTextBox.Text))
+            // Validação básica
+            if (string.IsNullOrWhiteSpace(SkuTextBox.Text)) // Alterado de CodeTextBox
             {
-                MessageBox.Show("O campo 'Código' não pode estar vazio.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
-                CodeTextBox.Focus();
+                MessageBox.Show("O campo 'SKU' não pode estar vazio.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
+                SkuTextBox.Focus(); // Alterado de CodeTextBox
                 return;
             }
             if (string.IsNullOrWhiteSpace(NameTextBox.Text))
             {
                 MessageBox.Show("O campo 'Nome' não pode estar vazio.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
                 NameTextBox.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(CategoriaTextBox.Text))
+            {
+                MessageBox.Show("O campo 'Categoria' não pode estar vazio.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
+                CategoriaTextBox.Focus();
                 return;
             }
 
@@ -56,27 +77,20 @@ namespace OMNOS.Screens
                 return;
             }
 
-            double stock;
-            if (!double.TryParse(StockTextBox.Text.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator).Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator), NumberStyles.Any, CultureInfo.CurrentCulture, out stock) || stock < 0)
+            int stock;
+            if (!int.TryParse(StockTextBox.Text, NumberStyles.Integer, CultureInfo.CurrentCulture, out stock) || stock < 0)
             {
-                MessageBox.Show("Valor de 'Estoque' inválido. Por favor, insira um número positivo (ex: 100,00).", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Valor de 'Estoque' inválido. Por favor, insira um número inteiro positivo (ex: 100).", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
                 StockTextBox.Focus();
                 return;
             }
-            // Validação simples para categoria (opcional)
-            if (string.IsNullOrWhiteSpace(CategoriaTextBox.Text))
-            {
-                MessageBox.Show("O campo 'Categoria' não pode estar vazio.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
-                CategoriaTextBox.Focus();
-                return;
-            }
 
-
-            ProductToEdit.Code = CodeTextBox.Text;
+            // Atualiza o objeto ProductToEdit
+            ProductToEdit.SKU = SkuTextBox.Text; // Alterado de Code
             ProductToEdit.Name = NameTextBox.Text;
+            ProductToEdit.Categoria = CategoriaTextBox.Text;
             ProductToEdit.Price = price;
             ProductToEdit.Stock = stock;
-            ProductToEdit.Categoria = CategoriaTextBox.Text; // Salvar categoria
 
             this.DialogResult = true;
             this.Close();
