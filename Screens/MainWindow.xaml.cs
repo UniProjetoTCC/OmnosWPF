@@ -358,7 +358,7 @@ namespace OMNOS.Screens
             {
                 if (isCurrentlyExpanded)
                 {
-                    SidebarColumn.Width = new GridLength(250);
+                    SidebarColumn.Width = new GridLength(0.1, GridUnitType.Star);
                     SidebarColumn.MaxWidth = 350;
                     if (ToggleSidebarButton != null) ToggleSidebarButton.HorizontalAlignment = HorizontalAlignment.Right;
                 }

@@ -4,19 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="OMNOS - Principal" Height="720" Width="1280"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
     <Window.Resources>
+        <!-- Global variables -->
+        <System:Double x:Key="NavigationIconHeight">26</System:Double>
+        <System:Double x:Key="NavigationIconWidth">26</System:Double>
+
         <Style x:Key="SidebarRadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#3B7A57"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Height" Value="40"/>
-            <Setter Property="Padding" Value="15,0,10,0"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -49,8 +54,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" x:Name="SidebarColumn" MinWidth="70" MaxWidth="350"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.15*" x:Name="SidebarColumn" MinWidth="70"/>
+            <ColumnDefinition Width="0.85*"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" x:Name="SidebarBorder">
@@ -76,13 +81,13 @@
                                    VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <ToggleButton Grid.Column="1" x:Name="ToggleSidebarButton"
+                    <ToggleButton Grid.Column="0" Grid.ColumnSpan="2" x:Name="ToggleSidebarButton"
                                   IsChecked="True"
                                   Checked="ToggleSidebarButton_StateChanged"
                                   Unchecked="ToggleSidebarButton_StateChanged"
-                                  VerticalAlignment="Center" HorizontalAlignment="Right"
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"
                                   Width="44" Height="40"  
-                                  Margin="0,0,10,0">
+                                  Margin="0">
                         <ToggleButton.Style>
                             <Style TargetType="ToggleButton">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -170,60 +175,60 @@
                 <RadioButton x:Name="InitialPageRadioButton" GroupName="SidebarNavigation"
                              Checked="InitialPageButton_Click" Margin="10,10,10,5" 
                              Style="{StaticResource SidebarRadioButtonStyle}" IsChecked="True">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="InitialPageIcon" Kind="HomeAnalytics"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="InitialPageButtonText" Text="Início" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="InitialPageButtonText" Text="Início" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="SecondPageRadioButton" GroupName="SidebarNavigation"
                              Checked="SecondPageButton_Click" Margin="10,5,10,5"
                              Style="{StaticResource SidebarRadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="SecondPageIcon" Kind="ShoppingSearchOutline"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="SecondPageButtonText" Text="Produtos" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="SecondPageButtonText" Text="Produtos" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="ThirdPageRadioButton" GroupName="SidebarNavigation"
                              Checked="ThirdPageButton_Click" Margin="10,5,10,5"
                              Style="{StaticResource SidebarRadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="ThirdPageIcon" Kind="ArchiveEditOutline"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="ThirdPageButtonText" Text="Estoque" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="ThirdPageButtonText" Text="Estoque" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="FourthPageRadioButton" GroupName="SidebarNavigation"
                              Checked="FourthPageButton_Click" Margin="10,5,10,5"
                              Style="{StaticResource SidebarRadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="FourthPageIcon" Kind="ClipboardTextClockOutline"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="FourthPageButtonText" Text="Histórico" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="FourthPageButtonText" Text="Histórico" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="FifthPageRadioButton" GroupName="SidebarNavigation"
                              Checked="FifthPageButton_Click" Margin="10,5,10,5"
                              Style="{StaticResource SidebarRadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="FifthPageIcon" Kind="AccountOutline"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="FifthPageButtonText" Text="Usuários" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="FifthPageButtonText" Text="Usuários" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
                 <RadioButton x:Name="SixthPageRadioButton" GroupName="SidebarNavigation"
                              Checked="SixthPageButton_Click" Margin="10,5,10,5"
                              Style="{StaticResource SidebarRadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialIcons:MaterialIcon x:Name="SixthPageIcon" Kind="CogOutline"
-                                                    VerticalAlignment="Center" Width="22" Height="22" Margin="0,0,10,0"/>
-                        <TextBlock x:Name="SixthPageButtonText" Text="Configuração" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" FontSize="16" Margin="0" Height="{StaticResource NavigationIconHeight}" Width="{StaticResource NavigationIconWidth}"/>
+                        <TextBlock x:Name="SixthPageButtonText" Text="Configuração" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10 0 0 0"/>
                     </StackPanel>
                 </RadioButton>
 
